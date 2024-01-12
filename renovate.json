@@ -8,7 +8,7 @@
             "defaultRegistryUrlTemplate": "https://odcs.fedoraproject.org/composes/production",
             "format": "html",
             "transformTemplates": [
-                "{ \"releases\": $map($, function($v) { { \"version\": $v.version } } ) }"
+                "{ \"releases\": $map($, function($v) { { \"version\": $v.version } }) }"
             ]
         }
     },
