@@ -6,7 +6,10 @@
     "customDatasources": {
         "compose": {
             "defaultRegistryUrlTemplate": "https://odcs.fedoraproject.org/composes/production",
-            "format": "html"
+            "format": "html",
+            "transformTemplates": [
+                "{ \"releases\": $map($, function($v) { { \"version\": $v.version } } }"
+            ]
         }
     },
     "customManagers": [
