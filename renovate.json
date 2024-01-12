@@ -2,25 +2,25 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
         "github>platform-engineering-org/.github"
-    ]
+    ],
     "customDatasources": {
-      "compose": {
-        "defaultRegistryUrlTemplate": "https://odcs.fedoraproject.org/composes/production",
-        "format": "html"
-      }
+        "compose": {
+            "defaultRegistryUrlTemplate": "https://odcs.fedoraproject.org/composes/production",
+            "format": "html"
+        }
     },
     "customManagers": [
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "compose.txt"
-        ],
-        "matchStrings": [
-          "https://odcs.fedoraproject.org/composes/production/(?<currentValue>.*)"
-        ],
-        "datasourceTemplate": "custom.compose",
-        "depNameTemplate": "Fedora-ELN",
-        "versioningTemplate": "regex:^Fedora-ELN-(?<major>\\d{8})\\.(?<minor>\\d+)?$"
-      }
-   ]
+        {
+            "customType": "regex",
+            "fileMatch": [
+                "compose.txt"
+            ],
+            "matchStrings": [
+                "https://odcs.fedoraproject.org/composes/production/(?<currentValue>.*)"
+            ],
+            "datasourceTemplate": "custom.compose",
+            "depNameTemplate": "Fedora-ELN",
+            "versioningTemplate": "regex:^Fedora-ELN-(?<major>\\d{8})\\.(?<minor>\\d+)?$"
+        }
+    ]
 }
