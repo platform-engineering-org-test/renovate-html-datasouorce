@@ -16,7 +16,7 @@
                 "compose.txt"
             ],
             "matchStrings": [
-                "https://odcs.fedoraproject.org/composes/production/(?<currentValue>.*)"
+                "https://odcs.fedoraproject.org/composes/production/(?<currentValue>.*)/"
             ],
             "datasourceTemplate": "custom.compose",
             "depNameTemplate": "Fedora-ELN",
