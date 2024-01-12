@@ -25,5 +25,11 @@
             "depNameTemplate": "Fedora-ELN",
             "versioningTemplate": "regex:^Fedora-ELN-(?<major>\\d{8})\\.(?<minor>\\d+)$"
         }
+    ],
+    "packageRules": [
+        {
+          "matchDatasources": ["custom.compose"],
+          "extractVersion": "(?<version>.+)/$"
+        }
     ]
 }
