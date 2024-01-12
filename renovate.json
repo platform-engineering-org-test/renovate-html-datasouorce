@@ -20,7 +20,7 @@
             ],
             "datasourceTemplate": "custom.compose",
             "depNameTemplate": "Fedora-ELN",
-            "versioningTemplate": "regex:^Fedora-ELN-(?<major>\\d{8})\\.(?<minor>\\d+)/$"
+            "versioningTemplate": "regex:^Fedora-ELN-(?<major>\\d{8})\\.(?<minor>\\d+)\/$"
         }
     ]
 }
