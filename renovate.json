@@ -1,33 +1,72 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-        "github>platform-engineering-org/.github"
-    ],
-    "customDatasources": {
-        "compose": {
-            "defaultRegistryUrlTemplate": "https://odcs.fedoraproject.org/composes/production",
-            "format": "html"
-            
-        }
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>centos/.github:renovate-config"
+  ],
+  "customDatasources": {
+    "fedora-eln-compose": {
+      "defaultRegistryUrlTemplate": "https://odcs.fedoraproject.org/composes/production",
+      "format": "html"
     },
-    "customManagers": [
-        {
-            "customType": "regex",
-            "fileMatch": [
-                "compose.txt"
-            ],
-            "matchStrings": [
-                "https://odcs.fedoraproject.org/composes/production/(?<currentValue>.*)"
-            ],
-            "datasourceTemplate": "custom.compose",
-            "depNameTemplate": "Fedora-ELN",
-            "versioningTemplate": "regex:^Fedora-ELN-(?<major>\\d{8})\\.(?<minor>\\d+)$"
-        }
-    ],
-    "packageRules": [
-        {
-          "matchDatasources": ["custom.compose"],
-          "extractVersion": "(?<version>.+)/$"
-        }
-    ]
+    "c9s-compose": {
+      "defaultRegistryUrlTemplate": "https://composes.stream.centos.org/development/",
+      "format": "html"
+    }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "fedora-eln.repo"
+      ],
+      "matchStrings": [
+        "https://odcs.fedoraproject.org/composes/production/(?<currentValue>.*)/compose/(.*)"
+      ],
+      "datasourceTemplate": "custom.fedora-eln-compose",
+      "depNameTemplate": "Fedora-ELN",
+      "versioningTemplate": "regex:^Fedora-ELN-(?<major>\\d{8})\\.(?<minor>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "c9s-devel-compose.repo"
+      ],
+      "matchStrings": [
+        "https://composes.stream.centos.org/development/(?<currentValue>.*)/compose/(.*)"
+      ],
+      "datasourceTemplate": "c9s-compose",
+      "depNameTemplate": "CentOS-Stream-9",
+      "versioningTemplate": "regex:^CentOS-Stream-9-(?<major>\\d{8})\\.d\\.0$"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "custom.fedora-eln-compose"
+      ],
+      "extractVersion": "(?<version>.+)/$",
+      "automerge": true,
+      "schedule": [
+        "at any time"
+      ],
+      "groupName": null
+    },
+    {
+      "matchDatasources": [
+        "custom.c9s-compose"
+      ],
+      "extractVersion": "(?<version>.+)/$",
+      "automerge": true,
+      "schedule": [
+        "at any time"
+      ],
+      "groupName": null
+    },
+    {
+      "matchPackageNames": [
+        "quay.io/centos-bootc/builder"
+      ],
+      "pinDigests": false
+    }
+  ]
 }
